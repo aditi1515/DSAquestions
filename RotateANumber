@@ -1,0 +1,42 @@
+import java.util.*;
+   
+   public class Main {
+   
+       public static void main(String[] args) {
+           Scanner sn = new Scanner(System.in);
+            //Enter the number to be rotated
+           int n = sn.nextInt();
+           //Enter the number of times n has to be rotated
+           int k = sn.nextInt();
+   
+           int noDigits = 0;
+           int temp = n;
+           while(temp != 0){
+               temp /= 10;
+               noDigits++;
+           }
+           //for value of k greater than numbe of digits
+           k = k % noDigits;
+           //foe negative value of k
+           if(k < 0){
+               k += noDigits;
+           }
+           int divisor = 1;
+           int multiply = 1;
+           //for every value of k
+           for(int i = 1; i <= noDigits; i++){
+               if(i <= k){
+                   divisor *= 10;
+               }
+               else {
+                   multiply *= 10;
+               }
+           }
+   
+           int quotient = n / divisor;
+           int remainder = n % divisor;
+   
+           int r = remainder * multiply + quotient;
+           System.out.println(r);
+       }
+   }
