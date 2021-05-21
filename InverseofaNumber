@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) {
+Scanner sn = new Scanner(System.in);
+//Enter a number in which any digit should not be repeated. 
+int n = sn.nextInt();
+//replace index value with face value to find inverse of a num.
+
+int inverseNum =0;
+int originalIndex = 1;
+ while(n>0){
+     int originalDigit  = n%10;
+     int invertedIndex = originalDigit;
+     int invertedDigit = originalIndex;
+     
+     //to find inverse
+     inverseNum = inverseNum + invertedDigit*(int)Math.pow(10,invertedIndex-1);
+     
+     //reinitialize
+     originalIndex++;
+     n/=10;
+ }
+ System.out.println(inverseNum);
+     
+     
+ }
+}
