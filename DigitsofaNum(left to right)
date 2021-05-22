@@ -1,0 +1,28 @@
+import java.util.*;
+    
+    public class Main{
+    
+    public static void main(String[] args) {
+     Scanner sn = new Scanner(System.in);
+     int n = sn.nextInt();
+     //to store the original num
+     int temp =n;
+     
+     int noDigits = 0;
+      while(temp>0){
+          temp/=10;
+          noDigits++;
+      }
+      //to extact the digits from the number
+      int divisor = (int)Math.pow(10,noDigits-1);
+      while(divisor>0){//if n>0 it will not print the ending zeros of the given number
+          //quotient is the extracted digit
+    int quotient = n/divisor;
+    System.out.println(quotient);
+    
+    //to reduce the number 
+     n = n%divisor;
+       divisor/=10;
+     }
+    }
+    }
