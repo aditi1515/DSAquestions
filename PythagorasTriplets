@@ -1,0 +1,39 @@
+import java.util.*;
+  
+  public class Main{
+  
+  public static void main(String[] args) {
+    Scanner sn = new Scanner(System.in);
+    
+    int a = sn.nextInt();
+    int b = sn.nextInt();
+    int c = sn.nextInt();
+    
+    int max = a;
+    if(b>=max){
+        max = b;
+    }
+        if(c>=max){
+            max = c;
+        }
+      
+        if (max == a){
+            boolean pythagoras = ((b*b + c*c) == (a*a));
+            System.out.println(pythagoras);
+        }
+        
+       else if(max == b){
+             boolean pythagoras = ((a*a + c*c) == (b*b));
+            System.out.println(pythagoras);
+        }
+        else {
+            boolean pythagoras = ((a*a + b*b) == (c*c));
+              System.out.println(pythagoras);
+            
+        }
+       
+        
+           
+    
+   }
+  }
