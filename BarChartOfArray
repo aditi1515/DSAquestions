@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+ Scanner sn = new Scanner(System.in);
+ int n = sn.nextInt();
+ int[] a = new int[n];
+ for(int i =0;i<a.length;i++){
+     a[i] = sn.nextInt();
+ }
+ int max = a[0];
+  for(int j = 0;j<a.length;j++){
+      if(a[j] > max){
+          max = a[j];
+      }
+  }
+  for(int j =max ;j>=1;j--){
+      for(int k = 0;k<a.length;k++){
+          if(a[k] >=j){
+              System.out.print("*\t");
+          }
+          else{
+              System.out.print("\t");
+          }
+          
+      }
+      System.out.println();
+  }
+ }
+
+}
