@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn. nextInt();
+    
+    int[] array = new int[n];
+    for(int i =0;i<array.length;i++){
+        array[i] = sn.nextInt();
+    
+    }
+    int maximum = array[0];
+    int minimum = array[0];
+    for(int j =1;j<array.length;j++){
+        if(array[j]>maximum){
+            maximum = array[j];
+        }
+        if(array[j]<minimum){
+            minimum = array[j];
+        }
+    }
+    int span = maximum - minimum;
+    System.out.println(span);
+    
+ }
+
+}
