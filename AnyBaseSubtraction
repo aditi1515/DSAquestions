@@ -1,0 +1,43 @@
+import java.util.*;
+  
+  public class Main{
+  
+  public static void main(String[] args) {
+      Scanner scn = new Scanner(System.in);
+      int b = scn.nextInt();
+      int n1 = scn.nextInt();
+      int n2 = scn.nextInt();
+  
+      int d = getDifference(b, n1, n2);
+      System.out.println(d);
+   }
+  
+   public static int getDifference(int b, int n1, int n2){
+     int subtractedNum = 0;
+     int power = 1;
+     int carry = 0;
+     while(n2>0){
+         int digit1 = n1%10;
+         int digit2 = n2%10;
+         
+         int sub =0;
+         digit2 = digit2 + carry;
+         if(digit2>=digit1){
+             carry =0;
+             sub = digit2 - digit1;
+             
+         }
+         else {
+             carry =-1;
+             sub = digit2 + b - digit1;
+         }
+         subtractedNum += sub*power;
+         
+         n1/=10;
+         n2/=10;
+         power*=10;
+     }
+     return subtractedNum;
+   }
+  
+  }
