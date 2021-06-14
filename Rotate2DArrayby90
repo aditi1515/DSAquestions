@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        int n = sn.nextInt();
+        int[][] a = new int[n][n];
+        for(int i =0;i<a.length;i++){
+            for(int j =0;j<a[0].length;j++){
+                a[i][j] = sn.nextInt();
+            }
+        }
+         //transpose 
+         for(int row =0;row<a.length;row++){
+             for(int col =row;col<a[0].length;col++){ // in upper diaognal elements
+                 int temp = a[row][col];
+                 a[row][col] = a[col][row];
+                 a[col][row] = temp;
+             }
+         }
+         //reverse 
+         int leftIndex = 0;
+         int rightIndex = a.length-1;
+         while(leftIndex < rightIndex){
+             for(int row =0;row<a.length;row++){
+                 int temp = a[row][leftIndex];
+                  a[row][leftIndex] = a[row][rightIndex];
+                  a[row][rightIndex] = temp;
+                  
+                    }
+                    leftIndex++;
+                    rightIndex--;
+                 }
+                 display(a);
+    }
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
