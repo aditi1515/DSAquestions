@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt();
+    int a[][] = new int[n][n];
+    for(int i =0;i<a.length;i++){
+        for(int j = 0;j<a[0].length;j++){
+            a[i][j] = sn.nextInt();
+        }
+    }
+
+       for(int row = 0; row<a.length;row++){
+               int leastcolIndex =0;
+          for(int col =1;col<a[0].length;col++){
+              if(a[row][col] < a[row][leastcolIndex]){
+                  leastcolIndex = col;
+                  
+              }
+          }
+          
+          boolean value = true;
+          for(int k = 0;k<a.length;k++){
+              if(a[k][leastcolIndex] > a[row][leastcolIndex]){
+                  value = false;
+                  break;
+                  
+              }
+          }
+          if(value == true){
+              System.out.println(a[row][leastcolIndex]);
+              return;
+          }
+       }
+   
+              System.out.println("Invalid input");
+          
+          
+    }
+}
