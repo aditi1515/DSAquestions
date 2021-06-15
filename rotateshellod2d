@@ -1,0 +1,135 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+      Scanner sn = new Scanner(System.in);
+      int n = sn.nextInt();
+      int m = sn.nextInt();
+      int[][] a = new int[n][m];
+      //for input
+      for(int i =0;i<a.length;i++){
+          for(int j =0;j<a[0].length;j++){
+              a[i][j] = sn.nextInt();
+          }
+      }
+        int s = sn.nextInt(); // for the shell number
+        int r = sn.nextInt(); //for number of rotations
+        
+        rotateTwoD(a,s,r);
+        display(a);
+        
+    }
+    //for the rotation of given 2d array
+    public static void rotateTwoD(int[][] arr,int s,int r){
+        int[] oneDArr = fillOneD(arr,s); //to fill one d array from shell
+        rotateOneD(oneDArr,r); //to rotate one d array rtimes
+        fillShell(arr,s,oneDArr); //to fill shell after rotation
+    }
+    //to get an one d array from given shel of 2d array
+     public static int[] fillOneD(int[][] arr,int s){
+         int minRow = s-1;
+         int maxRow = arr.length-s;
+         int minCol = s-1;
+         int maxCol = arr[0].length-s;
+         int sizeofOned = 2*(maxRow-minRow + maxCol - minCol ) ;
+         int[] oneD = new int[sizeofOned];
+         int index =0;
+         //leftwall
+         for(int i = minRow,j=minCol; i<=maxRow ; i++){
+             oneD[index] = arr[i][j];
+             index++;
+         }
+         //bottomwall
+         for(int i=maxRow,j=minCol+1;j<=maxCol;j++){
+             oneD[index] = arr[i][j];
+             index++;
+         }
+         //rightwall
+         for(int i = maxRow-1,j=maxCol;i>=minRow;i--){
+             oneD[index] = arr[i][j];
+             index++;
+         }
+         //topwall
+         for(int i=minRow,j=maxCol;j>=minCol;j--){
+             oneD[index] = arr[i][j];
+             index++;
+         }
+         return oneD;
+     }
+     
+     //to rotate the oned array obtained from shell of 2d array
+    public static void rotateOneD(int[] oneD,int r)
+    {
+    r=r%oneD.length;
+    if(r<0){
+        r = r+ oneD.length;
+        }
+        //to rotate oned array part by part
+        reverse(oneD,0,oneD.length-r-1);
+        reverse(oneD,oneD.length-r,oneD.length-1);
+        reverse(oneD,0,oneD.length-1);
+         return;
+    }
+     //to reverse the given one d array
+    public static void reverse(int[] a,int i,int j){
+       
+        //i = startingindex j = endingindex
+        
+          while(i<j){
+              int temp = a[i];
+              a[i] = a[j];
+              a[j] = temp;
+              
+              i++;
+              j--;
+          }
+          return;
+    }
+    //to refill the shell of 2darray with thr rotated one d array
+      public static void fillShell(int[][] a,int s,int[] oneDArr){
+       int minRow = s-1;
+         int maxRow = a.length-s;
+         int minCol = s-1;
+         int maxCol = a[0].length-s;
+         //int sizeofOned = 2*(maxRow-minRow + maxCol - minCol ) ;
+        // int[] oneD = new int[sizeofOned];
+         int index =0;
+         //leftwall
+         for(int i = minRow,j=minCol; i<=maxRow ; i++){
+           a[i][j] = oneDArr[index];
+             index++;
+         }
+         //bottomwall
+         for(int i=maxRow,j=minCol+1;j<=maxCol;j++){
+              a[i][j] = oneDArr[index];
+             index++;
+         }
+         //rightwall
+         for(int i = maxRow-1,j=maxCol;i>=minRow;i--){
+            a[i][j] = oneDArr[index];
+             index++;
+         }
+         //topwall
+         for(int i=minRow,j=maxCol;j>=minCol;j--){
+             a[i][j] = oneDArr[index];
+             index++;
+         }
+         return ;
+     }
+
+    
+    
+    
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
