@@ -1,0 +1,118 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+      Scanner sn = new Scanner(System.in);
+      int n = sn.nextInt();
+      int m = sn.nextInt();
+      int[][] a = new int[n][m];
+      for(int i =0;i<a.length;i++){
+          for(int j =0;j<a[0].length;j++){
+              a[i][j] = sn.nextInt();
+          }
+      }
+      int s = sn.nextInt();
+      int r = sn.nextInt();
+      rotateShell(a,s,r);
+      display(a);
+    }
+    public static void rotateShell(int[][] a , int s , int r){
+        int[] oned = fillfromshell(a,s);
+         rotateoned(oned,r);
+         fillshellfromoned(a,s,oned);
+    }
+    public static int[] fillfromshell(int[][] a, int s){
+       int minR = s-1;
+       int minC = s-1;
+      int  maxR = a.length-s;
+      int  maxC = a[0].length-1;
+        int size = 2*(maxR-minR + maxC - minC);
+        int[] oned = new int[size];
+        int index =0;
+        //leftwall
+        for(int i = minR , j = minC ; i<=maxR ;i++){
+            oned[index] = a[i][j];
+            index++;
+        }
+        //bottom wall
+        for(int i = maxR , j = minC+1; j <= maxC ;j++){
+               oned[index] = a[i][j];
+               index++;
+        }
+        //right wall
+        for(int i = maxR-1 , j = maxC ; i>=minR ;i--){
+               oned[index] = a[i][j];
+               index++;
+        }
+        //top wall
+        for(int i = minR , j = maxC-1; j>=minC;j--){
+               oned[index] = a[i][j];
+               index++;
+               
+        }
+         return oned;
+            
+        }
+        public static void rotateoned(int[] oned , int r){
+            r = r % oned.length;
+            if(r<0){
+                r = r+ oned.length;
+            }
+            reverse(oned , 0 , oned.length-r-1);
+            reverse(oned , oned.length-r , oned.length-1);
+            reverse(oned , 0 , oned.length-1);
+        }
+        public static void reverse(int[] oned , int li , int ri){
+            while(li<ri){
+                int temp = oned[li];
+                oned[li] = oned[ri];
+                oned[ri] = temp;
+                
+                li++;
+                ri--;
+                
+            }
+        }
+        
+    public static void fillshellfromoned(int[][] a , int s , int[] oned){
+      int  minR = s-1;
+    int    minC = s-1;
+      int  maxR = a.length-s;
+       int maxC = a[0].length-1;
+       // int size = 2*(maxR-minR + maxC - minC);
+        //int[] oned = new int[size];
+        int index =0;
+        //leftwall
+        for(int i = minR , j = minC ; i<=maxR ;i++){
+            a[i][j] = oned[index];
+            index++;
+        }
+        //bottom wall
+        for(int i = maxR , j = minC+1; j <= maxC ;j++){
+            a[i][j] = oned[index];
+               index++;
+        }
+        //right wall
+        for(int i = maxR-1 , j = maxC ; i>=minR ;i--){
+            a[i][j] = oned[index];
+               index++;
+        }
+        //top wall
+        for(int i = minR , j = maxC-1; j>=minC;j--){
+              a[i][j] = oned[index];
+               index++;
+        }
+    }
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
