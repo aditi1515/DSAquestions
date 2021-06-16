@@ -27,7 +27,7 @@ public class Main {
        int minR = s-1;
        int minC = s-1;
       int  maxR = a.length-s;
-      int  maxC = a[0].length-1;
+      int  maxC = a[0].length-s;
         int size = 2*(maxR-minR + maxC - minC);
         int[] oned = new int[size];
         int index =0;
@@ -47,7 +47,7 @@ public class Main {
                index++;
         }
         //top wall
-        for(int i = minR , j = maxC-1; j>=minC;j--){
+        for(int i = minR , j = maxC-1; j>=minC+1;j--){
                oned[index] = a[i][j];
                index++;
                
@@ -80,7 +80,7 @@ public class Main {
       int  minR = s-1;
     int    minC = s-1;
       int  maxR = a.length-s;
-       int maxC = a[0].length-1;
+       int maxC = a[0].length-s;
        // int size = 2*(maxR-minR + maxC - minC);
         //int[] oned = new int[size];
         int index =0;
@@ -100,7 +100,7 @@ public class Main {
                index++;
         }
         //top wall
-        for(int i = minR , j = maxC-1; j>=minC;j--){
+        for(int i = minR , j = maxC-1; j>=minC+1;j--){
               a[i][j] = oned[index];
                index++;
         }
