@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt();
+    int[] a = new int[n];
+    for(int i =0;i<a.length;i++){
+        a[i] = sn.nextInt();
+    }
+    
+     int limit = (int)Math.pow(2,a.length);
+     for(int i =0;i<limit;i++){
+         
+         String set = "";
+         int temp = i;
+         for(int j = a.length-1;j>=0;j--){
+             int rem = temp%2;
+             
+             if(rem == 0){
+                 set = "-	" + set;
+             }
+             else{
+             set = a[j] + "	" + set;
+         }
+         
+         temp = temp/2;
+     }
+     System.out.println(set);
+}
+}
+}
