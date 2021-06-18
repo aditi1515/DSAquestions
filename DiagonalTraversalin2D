@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+       Scanner sn = new Scanner(System.in);
+       int n = sn.nextInt();
+       int[][] a = new int[n][n];
+       for(int i =0;i<a.length;i++){
+           for(int j = 0;j<a[0].length;j++){
+                 a[i][j] = sn.nextInt();
+               }
+           }
+          //difference between address of diagonal elements
+         for(int diff =0;diff<a.length;diff++){
+             //every element starts with 0th row and col = diff ;
+             for(int i=0,j=diff;j<a.length;i++,j++){
+                 System.out.println(a[i][j]);
+         }
+         }
+         }
+    }
