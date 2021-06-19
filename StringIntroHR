@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        String B=sc.next();
+        sum(A,B);
+       System.out.println(A.compareTo(B)>0?"Yes":"No");
+        toggle(A,B);
+    
+        
+    }
+
+ 
+   public static void sum(String a , String b){
+       int na = a.length();
+       int nb = b.length();
+       
+       int sum = na+nb;
+       System.out.println(sum);
+   }
+   public static void toggle(String a,String b){
+       StringBuilder sb1 = new StringBuilder(a);
+       StringBuilder sb2 = new StringBuilder(b);
+       char ch1 = sb1.charAt(0);
+       char ch2 = sb2.charAt(0);
+       char uc1 = (char)('A' + ch1 - 'a');
+       sb1.setCharAt(0,uc1);
+       char uc2 = (char)('A' + ch2 - 'a');
+       sb2.setCharAt(0,uc2);
+         System.out.println(sb1.toString() + " " + sb2.toString());
+        // System.out.println(sb2.toString());
+   }
+}
+
