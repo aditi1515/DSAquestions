@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        int x = sn.nextInt();
+         int n = sn.nextInt();
+         int logpower =  power(x,n);
+         System.out.println(logpower);
+       
+    }
+
+    public static int power(int x, int n){
+        if(n==0){
+        return 1;
+        }
+        int xnbytwo = power(x,n/2);
+        int xn = xnbytwo * xnbytwo;
+        
+        if(n%2!=0){
+            xn = xn*x;
+        }
+        return xn;
+     
+    }
+
+}
