@@ -1,0 +1,35 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        String str = sn.next();
+        ArrayList<String> subsequence = gss(str);
+        System.out.println(subsequence);
+    }
+
+    public static ArrayList<String> gss(String str) {
+        if(str.length() ==0){
+            ArrayList<String> baseresult = new ArrayList<>();
+            baseresult.add("");
+            return baseresult;
+        }
+        char ch = str.charAt(0); //1
+       String substr = str.substring(1); //2
+       ArrayList<String> afterrecur = gss(substr); //3
+       
+       ArrayList<String> result = new ArrayList<>();
+       for(String finalresult : afterrecur){
+           result.add("" + finalresult);  //4
+           
+       }
+       for(String finalresult : afterrecur){ //5
+          result.add(ch + finalresult);
+   
+    }
+    return result; //6
+
+}
+}
