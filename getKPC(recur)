@@ -1,0 +1,43 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        String str = sn.next();
+        ArrayList<String> kpc = getKPC(str);
+        System.out.println(kpc);
+        
+        
+
+    }
+     static String[] keycodes = {".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+    public static ArrayList<String> getKPC(String str) {
+        if(str.length()==0){//base case
+           ArrayList<String> basestr = new ArrayList<>();
+           basestr.add("");
+           return basestr;
+        }
+      
+      char ch = str.charAt(0);//1
+      String substr = str.substring(1);//2
+      ArrayList<String> recurstr = getKPC(substr);//3
+      
+      ArrayList<String> resultstr = new ArrayList<>();//4
+      
+      
+      String codeforch = keycodes[ch-'0'];
+      for(int i =0;i<codeforch.length();i++){//5
+       char keycode = codeforch.charAt(i);
+          for(String finalresult : recurstr){
+              resultstr.add(keycode + finalresult);
+          }
+      }
+      return resultstr;//6
+      
+      
+     
+    }
+
+}
