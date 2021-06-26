@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        int n = sn.nextInt();
+        int m = sn.nextInt();
+        ArrayList<String> mazepath = getMazePaths(1,1,n,m);
+        System.out.println(mazepath);
+
+    }
+
+    // sr - source row
+    // sc - source column
+    // dr - destination row
+    // dc - destination column
+    public static ArrayList<String> getMazePaths(int sr, int sc, int dr, int dc) {
+        //basecase
+        if(sr==dr && sc==dc){
+            ArrayList<String> basecase = new ArrayList<>();
+            basecase.add("");
+            return basecase;
+        }
+        
+        ArrayList<String> finalpaths = new ArrayList<>();
+        //horizontal 
+        for(int hmoves = 1;hmoves<=dc-sc;hmoves++){
+            ArrayList<String> hpaths = getMazePaths(sr,sc+hmoves,dr,dc);
+            for(String paths : hpaths){
+                finalpaths.add("h" + hmoves + paths);
+                
+            }
+        }
+        //vertical moves
+         for(int vmoves = 1;vmoves<=dr-sr;vmoves++){
+            ArrayList<String> vpaths = getMazePaths(sr+vmoves,sc,dr,dc);
+            for(String paths : vpaths){
+                finalpaths.add("v" + vmoves + paths);
+            }
+     
+    }
+    //diagonal moves
+     for(int dmoves = 1;dmoves<=dc-sc && dmoves<=dr-sr;dmoves++){
+            ArrayList<String> dpaths = getMazePaths(sr+dmoves,sc+dmoves,dr,dc);
+            for(String paths : dpaths){
+                finalpaths.add("d" + dmoves + paths);
+    
+  }
+}
+        return finalpaths;
+    }
+}
