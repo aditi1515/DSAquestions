@@ -27,7 +27,7 @@ public class Main {
       ArrayList<String> resultstr = new ArrayList<>();//4
       
       
-      String codeforch = keycodes[ch-'0'];
+      String codeforch = keycodes[ch-'0'];//because '6' != 6, '6' = 54 as in ASCII code.
       for(int i =0;i<codeforch.length();i++){//5
        char keycode = codeforch.charAt(i);
           for(String finalresult : recurstr){
