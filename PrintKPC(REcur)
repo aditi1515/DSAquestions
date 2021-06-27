@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        String str = sn.nextLine();
+        printKPC(str,"");
+
+    }
+    static String[] keycodes = {".;","abc","def","ghi","jkl","mno","pqrs","tu","vwx","yz"};
+    public static void printKPC(String str, String asf) {
+        if(str.length()==0){//base case
+        System.out.println(asf);
+        return;
+        }
+        
+        char ch = str.charAt(0);
+        String substr = str.substring(1);
+        
+      
+        
+         String codeforch = keycodes[ch-'0'];//because '6' != 6, '6' = 54 as in ASCII code.
+      for(int i =0;i<codeforch.length();i++){
+       char keycode = codeforch.charAt(i);
+         printKPC( substr, asf +keycode );
+        
+        
+        
+    }
+
+}
+}
