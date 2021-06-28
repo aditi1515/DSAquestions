@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        String str = sn.next();
+        printEncodings(str,"");
+        
+
+    }
+
+    public static void printEncodings(String str,String ans) {
+        if(str.length()==0){
+        System.out.println(ans);
+        return;
+        }
+        else if(str.length()==1){
+            char ch = str.charAt(0);
+            if(ch == '0'){
+                return;
+            }
+            else{
+                int valueofch = ch - '0';
+                char codeforch = (char)('a' + valueofch -1);
+                System.out.println(ans + codeforch);
+            }
+        }
+        else{
+            char ch = str.charAt(0);
+            String substr = str.substring(1);
+            if(ch =='0'){
+                return;
+            }
+            else{
+                int valueofch = ch - '0';
+                char codeforch = (char)('a' + valueofch - 1);
+                printEncodings(substr,ans+ codeforch);
+        }
+        
+        String firstsecCh = str.substring(0,2);
+        String substr12 = str.substring(2);
+        
+        int valueforCh = Integer.parseInt(firstsecCh);
+        if(valueforCh <= 26){
+            char codeforCh = (char)('a' + valueforCh -1);
+            printEncodings(substr12 , ans + codeforCh);
+        }
+    }
+}
+}
