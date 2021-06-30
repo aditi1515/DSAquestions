@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Main{
+
+public static void main(String[] args) throws Exception {
+  Scanner sn = new Scanner(System.in);
+  int n = sn.nextInt();
+  int nthelement = Fibonacci(n , new int[n+1]);
+  System.out.println(nthelement);
+ }
+   public static int Fibonacci(int n , int[] qb){ //qb is to store 0 -n elements
+   if(n==0 || n==1){//base case
+       return n;
+   }
+   if(qb[n] != 0){ //1
+       return qb[n];
+   }
+   
+   int fibn1 = Fibonacci(n -1 , qb); //2
+   int fibn2 = Fibonacci(n-2 , qb); //3
+   int fibn = fibn1 + fibn2; //4
+   
+   qb[n] = fibn ; //5
+   return fibn; //6
+   
+}
+}
