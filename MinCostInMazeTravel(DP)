@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+   Scanner sn = new Scanner(System.in);
+   int n = sn.nextInt();
+   int m = sn.nextInt();
+   int[][] a = new int[n][m];
+   for(int i =0; i<a.length;i++){
+       for(int j = 0 ;j<a[0].length;j++){
+           a[i][j] = sn.nextInt();
+       }
+   }
+       int[][] dp = new int[n][m];
+       for(int i =dp.length-1;i>=0;i--){
+           for(int j = dp[0].length-1;j>=0;j--){
+               if( i == dp.length-1 && j== dp[0].length-1){//last cell of matrix
+                   dp[i][j] = a[i][j];
+               }
+               else if(i==dp.length-1){//last row
+                   dp[i][j] = dp[i][j+1] + a[i][j];
+               }
+               else if(j==dp[0].length-1){//last col
+                   dp[i][j] = dp[i+1][j] + a[i][j];
+               }
+               else {//row and col 
+                   dp[i][j] = (Math.min(dp[i+1][j] , dp[i][j+1]) )+ a[i][j];
+               }
+           }
+       }
+               
+               
+               System.out.println(dp[0][0]);
+           }
+       }
+    
+
