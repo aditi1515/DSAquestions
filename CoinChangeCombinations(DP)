@@ -1,0 +1,27 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sn = new Scanner(System.in);
+        int n = sn.nextInt();//number of coins
+        int[] coins = new int[n];
+        for(int i =0;i<coins.length;i++){
+            coins[i] = sn.nextInt();
+        }
+        int amt = sn.nextInt();
+        int[] dp = new int[amt+1];
+        dp[0] = 1;
+        for(int i = 0; i<coins.length;i++){//for combinations
+         for(int j = coins[i]; j<dp.length;j++){
+             dp[j]  += dp[j - coins[i]];
+             
+             
+         }
+        }
+        System.out.println(dp[amt]);
+        
+
+    }
+}
