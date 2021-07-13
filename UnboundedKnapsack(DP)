@@ -1,0 +1,36 @@
+import java.io.*;
+	import java.util.*;
+
+	public class Main {
+
+	    public static void main(String[] args) throws Exception {
+           Scanner sn = new Scanner(System.in);
+     int n = sn.nextInt();
+     int[] rate = new int[n];
+     int[] weight = new int[n];
+     for(int i = 0 ; i < n ; i++){
+         rate[i] = sn.nextInt();
+     }
+     for(int i = 0 ; i < n ; i++){
+         weight[i] = sn.nextInt();
+     }
+     int cap = sn.nextInt();
+     int[] dp = new int[cap+1];
+     
+     for(int bagcap = 1 ; bagcap < dp.length ; bagcap++){
+         int max = 0;
+         for(int j = 0 ; j < weight.length ; j++){
+             if(weight[j] <= bagcap ){
+                 int totalval = rate[j] + dp[bagcap - weight[j] ];
+                 if(max < totalval ){
+                     max = totalval;
+                 }
+                 
+             }
+         }
+         dp[bagcap] = max;
+     }
+     System.out.print(dp[cap]);
+     
+	    }
+	}
