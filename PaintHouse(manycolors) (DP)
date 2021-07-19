@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt(); //no. of houses
+    int k = sn.nextInt(); //no. of colors.
+    int[][] cost = new int[n][k]; 
+    for (int i = 0 ; i < cost.length; i++) { //to take input in cost array
+      for (int j = 0 ; j < cost[0].length; j++) {
+        cost[i][j] = sn.nextInt();
+      }
+    }
+    
+    
+    int least = Integer.MAX_VALUE; //to find leaast in first row 
+    int secondleast = Integer.MAX_VALUE; //to find secondleast in first row 
+    int[][] dp = new int[cost.length][cost[0].length];
+    for (int j = 0 ; j < dp[0].length; j++) {
+      dp[0][j] = cost[0][j];
+
+      if (cost[0][j] <= least) {
+        secondleast = least;
+        least = cost[0][j];
+      }
+      else if (cost[0][j] <= secondleast ) {
+        secondleast = cost[0][j];
+      }
+    }
+
+    for (int i = 1 ; i < dp.length; i++) {
+      int newleast = Integer.MAX_VALUE; // for finding least in rest of the rows
+      int newsecleast = Integer.MAX_VALUE; // for finding secondleast in rest of the rowws.
+      for (int j = 0 ; j < dp[0].length; j++) {
+        if ( least == dp[i - 1][j]) {
+          dp[i][j] = cost[i][j] + secondleast;
+        }
+        else {
+          dp[i][j] = cost[i][j] + least;
+        }
+
+        if (dp[i][j] <= newleast) {
+          newsecleast = newleast;
+          newleast = dp[i][j];
+        }
+        else if (dp[i][j] <= newsecleast ) {
+          newsecleast = dp[i][j];
+
+
+        }
+      }
+      least = newleast;
+      secondleast = newsecleast;
+    }
+    System.out.println(least);
+  }
+
+}
