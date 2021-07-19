@@ -21,12 +21,12 @@ public class Main {
     for (int j = 0 ; j < dp[0].length; j++) {
       dp[0][j] = cost[0][j];
 
-      if (cost[0][j] <= least) {
+      if (dp[0][j] <= least) {
         secondleast = least;
-        least = cost[0][j];
+        least = dp[0][j];
       }
-      else if (cost[0][j] <= secondleast ) {
-        secondleast = cost[0][j];
+      else if (dp[0][j] <= secondleast ) {
+        secondleast = dp[0][j];
       }
     }
 
