@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt();
+    int k = sn.nextInt();
+
+    long samecolors = k * 1; //for first and  second house
+    long differentcolors = k * (k - 1);//for first and  second house
+    long total = samecolors + differentcolors;
+  
+  for(int i = 3 ; i<=n ;i++){
+    samecolors = differentcolors *1;
+    differentcolors = total*(k-1);
+    total = samecolors + differentcolors;
+  }
+  System.out.println(total);
+
+
+
+
+  }
+}
