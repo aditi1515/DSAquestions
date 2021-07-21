@@ -1,0 +1,33 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt();
+    int[] stockprice = new int[n];
+    for(int i =0;i<stockprice.length;i++){
+        stockprice[i] = sn.nextInt();
+    }
+    int buyday =0;
+    int sellday =0;
+    int profit =0;
+    
+    for(int i =1;i<stockprice.length;i++){
+        if(stockprice[i] >= stockprice[i-1]){
+            sellday++;
+        }
+        else {
+            profit += stockprice[sellday] - stockprice[buyday];
+            buyday = sellday =i;
+        }
+       
+    }
+       profit += stockprice[sellday] - stockprice[buyday];//for last day
+   
+     System.out.println(profit);
+     
+    }
+
+}
