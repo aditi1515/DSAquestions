@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+     Scanner sn = new Scanner(System.in);
+     int n = sn.nextInt(); //no of days
+     
+     int[] stockprice = new int[n];
+     for(int i = 0 ; i<stockprice.length ;i++){
+         stockprice[i] = sn.nextInt();
+     }
+     
+     int leastprice = Integer.MAX_VALUE;
+     int profittoday = 0;
+     int overallprofit = 0;
+     
+     for(int i = 0 ;i<stockprice.length ;i++){
+         if(stockprice[i] < leastprice ){
+             leastprice = stockprice[i];
+         }
+           profittoday = stockprice[i] - leastprice;
+          
+          if(profittoday > overallprofit){
+              overallprofit = profittoday;
+          }
+     }
+      System.out.println(overallprofit);
+    }
+
+}
