@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt(); //no. of days
+    int[] stockprice = new int[n];
+    for (int i = 0; i < stockprice.length; i++) {
+      stockprice[i] = sn.nextInt();
+    }
+    int boughtprofit = -stockprice[0];
+    int soldprofit = 0;
+    int coolprofit = 0;
+
+    for (int i = 1 ; i < stockprice.length; i++) {
+      int newboughtprofit = 0;
+      int newsoldprofit = 0;
+      int newcoolprofit = 0;
+    
+    //for buying
+    if (coolprofit - stockprice[i] > boughtprofit) {
+      newboughtprofit = coolprofit - stockprice[i] ;
+    }
+    else {
+      newboughtprofit = boughtprofit;
+    }
+    //for selling
+    if (stockprice[i] + boughtprofit > soldprofit) {
+       newsoldprofit = stockprice[i] + boughtprofit;
+     }
+     else {
+       newsoldprofit = soldprofit;
+     }
+     //cooldown profit
+     if ( soldprofit > coolprofit ) {
+       newcoolprofit = soldprofit;
+  }
+  else {
+ 
+    newcoolprofit = coolprofit;
+  }
+  boughtprofit = newboughtprofit ;
+  soldprofit = newsoldprofit ;
+  coolprofit = newcoolprofit ;
+}
+System.out.println(soldprofit);
+
+}
+}
