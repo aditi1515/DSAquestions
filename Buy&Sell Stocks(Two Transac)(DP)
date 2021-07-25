@@ -1,0 +1,61 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    int n = sn.nextInt();
+    int[] stockprice = new int[n];
+    for (int i = 0; i < stockprice.length; i++) {
+      stockprice[i] = sn.nextInt();
+    }
+
+    //if selling is mandatory today,then profit till date when bought on least price day in past
+    int leastprice = stockprice[0]; //for finding best buying point when selling is mandatory
+    int profitifsoldtoday = 0;
+    int[] dpwhenselling = new int[stockprice.length]; //for storing max profit made uptoday and including today if selling is mandatory .
+
+    for (int i = 1; i < stockprice.length; i++) {
+      if (stockprice[i] < leastprice) {
+        leastprice = stockprice[i];
+      }
+      profitifsoldtoday = stockprice[i] - leastprice;
+
+      if (profitifsoldtoday > dpwhenselling[i - 1] ) {
+        dpwhenselling[i] = profitifsoldtoday;
+      }
+      else {
+        dpwhenselling[i] = dpwhenselling[i - 1];
+      }
+    }
+    //if buying is mandatory today ,then profit made till today by selling on the max price day in future
+    int maxpriceaftertoday = stockprice[stockprice.length - 1]; //for finding best selling point when buying is mandatory
+    int profitifboughttoday = 0;
+    int[] dpwhenbuying = new int[stockprice.length]; //for storing max profit made uptoday and including today if buying is mandatory .
+    for (int i = stockprice.length - 2; i >= 0; i--) {
+      if (stockprice[i] > maxpriceaftertoday) {
+        maxpriceaftertoday = stockprice[i];
+      }
+      profitifboughttoday =maxpriceaftertoday - stockprice[i];
+
+      if ( profitifboughttoday >  dpwhenbuying[i + 1] ) {
+        dpwhenbuying[i] = profitifboughttoday;
+      }
+      else {
+        dpwhenbuying[i] = dpwhenbuying[i + 1];
+
+      }
+    }
+
+    //for the overlapping transactions when selling is mandatory and when buying is mandatory , max profit is the max sum of both transactions.
+
+    int overallprofit = 0;
+    for (int i = 0; i < stockprice.length; i++) {
+      if (dpwhenselling[i] + dpwhenbuying[i] > overallprofit) {
+        overallprofit = dpwhenselling[i] + dpwhenbuying[i];
+      }
+    }
+    System.out.println(overallprofit);
+  }
+}
