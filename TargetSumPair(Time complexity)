@@ -5,6 +5,7 @@ public class Main {
 
   public static void targetSumPair(int[] arr, int target) {
     //array.sort function for sorting array
+    //O(logN) time complexity
     Arrays.sort(arr);
     int i = 0;
     int j = arr.length - 1;
