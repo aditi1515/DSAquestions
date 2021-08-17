@@ -1,0 +1,71 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sn = new Scanner(System.in);
+    String exp = sn.nextLine();
+
+    Stack<Character> st = new Stack<>();
+    //for open == push
+    //for close == if stack size ==0 i.e. closing brackets are more --> false & if correspondng ch is inappropriate then also --> false and if ch is appropriate then remove it from stack
+    //at the end if stack size !=0 i.e. opening brackets are more --> false
+    for (int i = 0; i < exp.length(); i++) {
+      char ch = exp.charAt(i);
+      if (ch == '(' || ch == '[' || ch == '{') {
+        st.push(ch);
+      }
+      else if (ch == ')') {
+        boolean res =  closingch(st, '(');
+        if (res == false) {
+          System.out.println(res);
+          return;
+        }
+      }
+      else if (ch == ']') {
+       boolean res= closingch(st, '[');
+        if (res == false) {
+          System.out.println(res);
+          return;
+      }
+      }
+      else if (ch == '}') {
+        boolean res=closingch(st, '{');
+         if (res == false) {
+          System.out.println(res);
+          return;
+      }
+    
+    }
+    }
+    if (st.size() == 0) {
+      System.out.println(true);
+
+    }
+    else {
+      System.out.println(false);
+    }
+
+
+  }
+
+
+  public static boolean closingch(Stack<Character> st, char ch) {
+
+    if (st.size() == 0) {
+
+      return false;
+    }
+    else if (st.peek() != ch) {
+     
+      return false;
+    }
+    else {
+      st.pop();
+      return true;
+    }
+  }
+}
+
+  
