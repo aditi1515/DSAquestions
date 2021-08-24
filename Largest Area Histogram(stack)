@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    int n = Integer.parseInt(br.readLine());
+    int[] a = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = Integer.parseInt(br.readLine());
+    }
+
+    int [] rightlimit = new int[a.length]; //to find next smaller element on the right side
+    Stack<Integer> stright = new Stack<>();
+    stright.push(a.length - 1);
+    rightlimit[a.length - 1] =   a.length; //if no next smaller element exists on right side
+    for (int i = a.length - 2; i >= 0; i--) {
+      while ( stright.size() > 0 && a[i] <= a[ stright.peek()]) {
+      stright.pop(); //pops all greater elements
+      }
+      if ( stright.size() == 0) {
+      rightlimit[i] = a.length;
+      }
+      else {
+        rightlimit[i] =  stright.peek();
+      }
+       stright.push(i);
+    }
+    int [] leftlimit = new int[a.length]; //to find next smaller element on the left side
+    Stack<Integer> stleft = new Stack<>();
+    stleft.push(0);
+    leftlimit[0] =   -1; //if no next smaller element exists on left side
+    for (int i = 1; i < a.length; i++) {
+      while (stleft.size() > 0 && a[i] <= a[stleft.peek()] ){
+      stleft.pop(); //pops all greater elements
+      }
+      if (stleft.size() == 0) {
+      leftlimit[i] = -1;
+      }
+      else {
+        leftlimit[i] = stleft.peek();
+      }
+      stleft.push(i);
+    }
+
+    int maxarea = 0;
+    for (int i = 0; i <a.length; i++) {
+      int width = rightlimit[i] - leftlimit[i] - 1;
+      int area = width * a[i];
+      if (area > maxarea) {
+        maxarea = area;
+      }
+    }
+    System.out.println(maxarea);
+  }
+}
+
