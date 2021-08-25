@@ -1,0 +1,72 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String exp = br.readLine();
+    Stack<String> prefix = new Stack<>();
+    Stack<String> postfix = new Stack<>();
+    Stack<Character> operators = new Stack<>();
+
+    for (int i = 0; i < exp.length(); i++) {
+      char ch = exp.charAt(i);
+      if (ch == '(') {
+        operators.push(ch);
+
+      }
+      else if ((ch >= '0' && ch <= '9') || (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+        prefix.push(ch + ""); //to convert ch to string
+        postfix.push(ch + ""); //to convert ch to string
+      }
+      else if ( ch == ')') {
+        while (operators.peek() != '(') {
+          processing(operators, prefix, postfix);
+        }
+        operators.pop(); //to pop opening bracket
+      }
+      else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+        //higher priority operators are solved first
+        while (operators.size() > 0 && operators.peek() != '(' && precedence(ch) <= precedence(operators.peek())) {
+          processing(operators, prefix, postfix);
+        }
+        operators.push(ch); //current character is pushed in operator stack
+      }
+    }
+    while (operators.size() != 0) {
+      processing(operators, prefix, postfix);
+
+    }
+    System.out.println(postfix.peek());
+    System.out.println(prefix.peek());
+
+
+  }
+  public static void processing( Stack<Character> operators,  Stack<String> prefix, Stack<String> postfix) {
+    char op = operators.pop();
+    String prevalue2 = prefix.pop();
+    String prevalue1 = prefix.pop();
+    String prevalue = op + prevalue1 + prevalue2; //prefix --> opv1v2
+    prefix.push(prevalue);
+
+    String postvalue2 = postfix.pop();
+    String postvalue1 = postfix.pop();
+    String postvalue = postvalue1 + postvalue2 + op; //postfix --> v1v2op
+    postfix.push(postvalue);
+
+  }
+  public static int precedence(char op) {
+    if (op == '+' || op == '-') {
+      return 1;
+    }
+
+    else if (op == '*' || op == '/') {
+      return 2;
+    }
+    else {
+      return 0;
+    }
+  }
+}
