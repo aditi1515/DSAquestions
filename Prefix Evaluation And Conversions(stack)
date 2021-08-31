@@ -1,0 +1,59 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String exp = br.readLine();
+    Stack<Integer> value = new Stack<>();
+    Stack<String> infix =  new Stack<>();
+    Stack<String> postfix = new Stack<>();
+    for (int i = exp.length() - 1; i >= 0 ; i--) {
+      char ch = exp.charAt(i);
+      if (ch >= '0' && ch <= '9') {
+        infix.push(ch + ""); //ch to string
+        postfix.push(ch + "");
+        value.push(ch - '0'); //ch to integer
+      }
+      else if ( ch == '+' || ch == '-' || ch == '*' || ch == '/') {
+        char op = ch ;
+        String post1 = postfix.pop();
+        String post2 = postfix.pop();
+        String post = post1 + post2 + op;
+        postfix.push(post);
+
+        String in1 = infix.pop();
+        String in2  = infix.pop();
+        String in =  "(" + in1 + op + in2 + ")";
+        infix.push(in);
+
+        int num1 = value.pop();
+        int num2 = value.pop();
+        int result = calculate( num1,  num2,  op);
+        value.push(result);
+      }
+    }
+
+    System.out.println(value.peek());
+    System.out.println(infix.peek());
+    System.out.println(postfix.peek());
+  }
+
+
+  public static int calculate(int num1, int num2, char op) {
+    if (op == '+') {
+      return num1 + num2;
+    }
+    else if (op == '-') {
+      return num1 - num2;
+    }
+    else if (op == '*') {
+      return num1 * num2;
+    }
+    else {
+      return num1 / num2;
+    }
+  }
+}
