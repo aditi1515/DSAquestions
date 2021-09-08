@@ -55,7 +55,7 @@ public class Main {
     }
 
     int min() {
-      if (allData.size() == 0) {
+      if (minData.size() == 0) {
         System.out.println("Stack underflow");
         return -1;
       }
