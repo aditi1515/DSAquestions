@@ -1,0 +1,109 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static class Node{
+        int val;
+        Node next;
+        Node(int data , Node next){
+            this.val = data;
+            this.next = next;
+        }
+    }
+    public static void addLast(int list , int val){
+        Node nnode = new Node(val , null);
+        if(list == 1){
+            if(head1 == null){
+                head1 = tail1 = nnode;
+            }
+            else{
+                tail1.next = nnode;
+                tail1 = nnode;
+            }
+            size1++;
+        }
+         else if(list == 2){
+            if(head2 == null){
+                head2 = tail2 = nnode;
+            }
+            else{
+                tail2.next = nnode;
+                tail2 = nnode;
+            }
+            size2++;
+        }
+        else{
+           if(head3 == null){
+                head3 = tail3 = nnode;
+            }
+            else{
+                tail3.next = nnode;
+                tail3 = nnode;
+            } 
+            size3++;
+        }
+    }
+    public static void oddeven(){
+        Node temp = head1;
+        while(temp!=null){
+            if((temp.val)%2 == 0){
+                addLast(2 , temp.val);
+                temp = temp.next;
+            }
+            else{
+                addLast(3 , temp.val);
+                temp = temp.next;
+            }
+        }
+         tail3.next = head2;
+    }
+    public static void display(int list){
+         if(list == 1){
+             Node temp = head1;
+             while(temp!=null){
+                 System.out.print(temp.val + " ");
+                 temp = temp.next;
+             }
+             System.out.println();
+    }
+    else if(list ==2){
+                     Node temp = head2;
+             while(temp!=null){
+                 System.out.print(temp.val + " ");
+                 temp = temp.next;
+             }
+             System.out.println();
+    }
+    else{
+                     Node temp = head3;
+             while(temp!=null){
+                 System.out.print(temp.val + " ");
+                 temp = temp.next;
+             }
+             System.out.println();
+    }
+    }
+    static Node head1;
+    static Node tail1;
+   static int size1=0;
+        
+    static Node head2;
+    static Node tail2;
+   static int size2=0;
+    
+    static Node head3;
+    static Node tail3;
+   static int size3=0;
+    
+	public static void main (String[] args) {
+	  Scanner sn = new Scanner(System.in);
+	  int n = sn.nextInt();
+	  while(n-->0){
+	      int val = sn.nextInt();
+	      addLast(1 , val);
+	  }
+	  display(1);
+	  oddeven();
+	  display(3);
+	}            
+}
