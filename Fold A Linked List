@@ -1,0 +1,98 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+public class Main{
+    public static class Node{
+        int val;
+        Node next;
+        Node(int val , Node next){
+            this.val = val;
+            this.next = next;
+        }
+    }
+    public static class LinkedList{
+        Node head;
+        Node tail;
+        int size ;
+    public void addLast(int val){
+        Node nnode = new Node(val,null);
+        if(size==0){
+            head = tail = nnode;
+        }
+        else{
+            tail.next = nnode;
+            tail = nnode;
+        }
+        size++;
+    }
+    public void addFirst(int val){
+      Node nnode = new Node(val,null);
+        if(size==0){
+            head = tail = nnode;
+        }
+        else{
+            nnode.next = head;
+            head = nnode;
+        }
+        size++; 
+    }
+    public Node getNodeAt(int idx){
+        Node temp = head;
+        for(int i =0;i<idx;i++){
+            temp = temp.next;
+        }
+        return temp;
+    }
+    public void fold(){
+        Node left = head;
+        int k = size-1;
+        while(true){
+            
+          Node right = getNodeAt(k);
+          if(left == right){
+              tail = left;
+              left.next = null;
+              break;
+          } 
+          else{
+              Node temp = left.next;
+              left.next = right;
+              right.next = temp;
+              left = temp;
+          }
+     
+            
+        }
+    }
+    public void display(){
+        Node temp = head;
+        while(temp!=null){
+            System.out.print(temp.val + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    }
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		  Scanner sn = new Scanner(System.in);
+		  int n = sn.nextInt();
+		  LinkedList l1 = new LinkedList();
+		  
+		  while(n-->0){
+		      int val = sn.nextInt();
+		      l1.addLast(val);
+		  }
+      int a = sn.nextInt();
+      int b = sn.nextInt();
+		  l1.display();
+		  l1.fold();
+		  l1.display();
+      l1.addFirst(a);
+      l1.addLast(b);
+      l1.display();
+	}
+}
