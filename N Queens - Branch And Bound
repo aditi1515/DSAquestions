@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  
+  public static void solution(boolean[][] board , int row , String asf , boolean[] cols , boolean[] normaldig , boolean[] reversedig){
+    if(row == board.length){
+      System.out.println(asf + ".");
+      return;
+    }
+    for(int col = 0; col<board[0].length;col++){
+      if(cols[col] == false && normaldig[row+col] == false && reversedig[row-col+board.length-1]==false){
+        board[row][col] = true;
+        cols[col] = true;
+        normaldig[row+col] = true;
+        reversedig[row-col+board.length-1] = true;
+        solution(board , row+1 , asf + row + "-" + col + ", " ,cols , normaldig , reversedig);
+        board[row][col] = false;
+        cols[col] = false;
+        normaldig[row+col] = false;
+        reversedig[row-col+board.length-1] = false;
+      }
+    }
+  }
+  public static void main(String[] args) throws Exception {
+    Scanner scn = new Scanner(System.in);
+    int n = scn.nextInt();
+    boolean[][] board = new boolean[n][n];
+    boolean[] cols = new boolean[n];
+    boolean[] normaldig = new boolean[2*n-1];
+    boolean[] reversedig = new boolean[2*n-1];
+    solution(board , 0 , "" , cols , normaldig , reversedig);
+    
+  }
+
+}
