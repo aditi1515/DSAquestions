@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	static int max = 0;
+	public static void getMaxGold(int[][] arr){
+		boolean visited[][] = new boolean[arr.length][arr[0].length];
+		
+		for(int i =0;i<arr.length;i++){
+			for(int j =0;j<arr[i].length;j++){
+				if(arr[i][j] !=0 && visited[i][j] == false){
+					ArrayList<Integer> bag= new ArrayList<Integer>();
+					travelforGold(arr ,visited, i , j, bag);
+					int sumOfCollectedGold = 0;
+					for(int gold : bag){
+					sumOfCollectedGold+=gold;
+					}
+                max = Math.max(sumOfCollectedGold, max); 
+		     
+				}
+			}
+		}
+}
+public static void travelforGold(int[][] arr,boolean[][] visited, int r,int c , ArrayList<Integer> bag){
+	if(r<0 || c<0 || r>=arr.length || c>=arr[0].length || arr[r][c] == 0||visited[r][c] == true) return;
+
+	
+	visited[r][c] = true;
+	bag.add(arr[r][c]);
+     travelforGold(arr ,visited, r-1 , c , bag);
+     travelforGold(arr ,visited, r , c+1 , bag);
+     travelforGold(arr ,visited, r, c-1 , bag);
+     travelforGold(arr ,visited, r+1 , c , bag);
+
+}
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		int n = scn.nextInt();
+		int m = scn.nextInt();
+		int[][] arr = new int[m][n];
+		for(int i = 0; i < arr.length; i++){
+			for(int j = 0 ; j  < arr[0].length; j++){
+				arr[i][j] = scn.nextInt();
+			}
+		}
+		getMaxGold(arr);
+		System.out.println(max);
+	}
+		
+}
