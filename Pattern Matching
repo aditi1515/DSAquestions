@@ -1,0 +1,46 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+public static void solution(String pattern , int idx , String str , HashMap<Character,String> map){
+ if(str.length()==0 ||idx == pattern.length()) {
+	 if(str.length()==0 && idx == pattern.length()){
+    HashSet<Character> set = new HashSet<Character>();
+	for(int i=0;i<pattern.length();i++)
+ {
+	   if(set.contains(pattern.charAt(i))==false){
+		 System.out.print(pattern.charAt(i) + " -> " + map.get(pattern.charAt(i)) + ", ");
+		 set.add(pattern.charAt(i));
+	   }
+	 }
+	 System.out.println(".");
+	
+	 }
+	  return;
+ }
+ 
+   if(map.containsKey(pattern.charAt(idx))){
+	    String mapped = map.get(pattern.charAt(idx));
+	  if(str.length()>=mapped.length()){
+		  if(str.substring(0,mapped.length()).equals(mapped))
+		  solution(pattern,idx+1 ,str.substring(mapped.length()),map);
+	  }
+   }
+   else{
+	   for(int i =0;i<str.length();i++){
+	   map.put(pattern.charAt(idx) , str.substring(0,i+1));
+	   solution(pattern , idx+1 , str.substring(i+1),map);
+        map.remove(pattern.charAt(idx));
+   }
+}
+}
+	
+		
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		String str = scn.next();
+		String pattern = scn.next();
+		HashMap<Character,String> map = new HashMap<>();
+	     solution(pattern , 0 , str , map);
+	}
+}
