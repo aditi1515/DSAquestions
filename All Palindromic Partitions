@@ -1,0 +1,41 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+	public static void solution(String str, String asf) {
+		if(str.length()==0){
+			System.out.println( asf );
+			return;
+		}
+		//write you code here
+		for(int i=0;i<str.length();i++){
+				String substr = str.substring(0 , i+1);
+				String restString = str.substring(i+1);
+				if(palindrome(substr)){
+					solution( restString, asf +"(" + substr + ") ");
+					
+				}
+				
+		}
+		
+	}
+	public static boolean palindrome(String substr){
+		int i =0;
+		int j = substr.length()-1;
+		while(i<j){
+			if(substr.charAt(i)!=substr.charAt(j)) return false;
+			else{
+				i++;
+				j--;
+			}
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
+		String str = scn.nextLine();
+		solution(str, "" );
+	}
+
+}
