@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void combinations(int boxNo, int boxes, int count, int items, String ans){
+    // write your code here
+    if(boxNo>boxes){
+      if(count==items){
+        System.out.println(ans);
+      }
+      return;
+    }
+   combinations(boxNo+1,boxes,count+1,items,ans+"i");
+   combinations(boxNo+1,boxes,count,items,ans+ "-");
+  }
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int nboxes = Integer.parseInt(br.readLine());
+    int ritems = Integer.parseInt(br.readLine());
+    combinations(1, nboxes, 0, ritems, "");
+  }
+
+}
