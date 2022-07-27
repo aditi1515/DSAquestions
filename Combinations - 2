@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void combinations(boolean[] boxes, int currItem, int items, int lastlevelbox){
+    // write your code here
+    if(currItem>items){
+      for(int i=0;i<boxes.length;i++){
+        if(boxes[i]==true){
+          System.out.print("i");
+        }
+        else{
+          System.out.print("-");
+        }
+      }
+      System.out.println();
+      return;
+    }
+    for(int i=lastlevelbox+1;i<boxes.length;i++){
+      if(boxes[i]==false){
+        boxes[i]=true;
+        combinations(boxes,currItem+1,items,i);
+        boxes[i]=false;
+      }
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int nboxes = Integer.parseInt(br.readLine());
+    int ritems = Integer.parseInt(br.readLine());
+    combinations(new boolean[nboxes], 1, ritems, -1);
+  }
+
+}
