@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void kselection(String ustr , int lastidx , int k , String ans){
+   if(ans.length()==k){
+     System.out.println(ans);
+     return;
+   }
+    for(int i = lastidx+1;i<ustr.length();i++){
+      kselection(ustr,i,k,ans+ustr.charAt(i));
+    }
+  }
+  public static void main(String[] args){
+   Scanner sn = new Scanner(System.in);
+   String str = sn.next();
+   int k = sn.nextInt();
+   Set<Character> hs = new HashSet<>();
+   String uniquestr ="";
+   for(int i=0;i<str.length();i++){
+     if(hs.contains(str.charAt(i))==false){
+       hs.add(str.charAt(i));
+       uniquestr+=str.charAt(i);
+     }
+   }
+   kselection(uniquestr , -1 , k , "");
+  }
+
+}
