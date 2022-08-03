@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+  public static void klengthwords(String ustr ,int idx,int k ,int numofsets ,Character ans[]){
+        if(idx==ustr.length()){
+         if(k==numofsets){
+           for(int i =0;i<ans.length;i++){
+           System.out.print(ans[i]);
+           }
+           System.out.println();
+           
+         }
+         return;
+        }
+    for(int i =0;i<ans.length;i++){
+      if(ans[i]==null){
+        ans[i] = ustr.charAt(idx);
+      klengthwords(ustr,idx+1,k,numofsets+1,ans);
+      ans[i] = null;
+    }
+    }
+    klengthwords(ustr,idx+1,k, numofsets,ans);
+  }
+ 
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    String str = br.readLine();
+    int k = Integer.parseInt(br.readLine());
+
+    HashSet<Character> unique = new HashSet<>();
+    String ustr = "";
+    for (char ch : str.toCharArray()) {
+      if (unique.contains(ch) == false) {
+        unique.add(ch);
+        ustr += ch;
+      }
+    }
+    klengthwords(ustr ,0,k ,0,new Character[k]);
+
+    
+  }
+
+}
