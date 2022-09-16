@@ -1,0 +1,46 @@
+
+import java.io.*;
+import java.util.*;
+public class genericTreeImplement {
+	public static class Node {
+		int val = 0;
+		ArrayList<Node> children = new ArrayList<>();
+		Node(int data) {
+			val = data;
+		}
+	}
+	public static class genericTree {
+		Node root = null;
+		genericTree(int[] arr) {
+			Stack<Node> st = new Stack<>();
+			for (int i = 0; i < arr.length; i++) {
+				if (st.size() == 0) {
+					root = new Node(arr[i]);
+					st.push(root);
+				} else if (arr[i] == -1) {
+					st.pop();
+				} else {
+					Node child = new Node(arr[i]);
+					st.peek().children.add(child);
+					st.push(child);
+				}
+			}
+		}
+		void displayChild(Node node) {
+			System.out.print(node.val + " : ");
+			for (Node child : node.children) {
+				System.out.print(child.val + " ");
+			}
+			System.out.println();
+			for (Node child : node.children) {
+				displayChild(child);
+			}
+		}
+	}
+	public static void main(String[] args) {
+		int arr[] = {10, 20, 50, -1, 60, -1, -1, 30, 70, 80, -1, 90, -1, -1, -1, 40, -1, -1};
+		genericTree tree = new  genericTree(arr);
+
+		tree.displayChild(tree.root);
+	}
+}
